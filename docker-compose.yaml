@@ -18,8 +18,9 @@ services:
       - "5000:5000"
     restart: always
     container_name: api
+    environment:
+      MONGO_URL: mongodb://emongo:27017/emart   # FIXED
     depends_on:
-      - nginx
       - emongo
 
   webapi:
@@ -29,6 +30,10 @@ services:
       - "9000:9000"
     restart: always
     container_name: webapi
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mysql://emartdb:3306/emart?useSSL=false&allowPublicKeyRetrieval=true
+      SPRING_DATASOURCE_USERNAME: root
+      SPRING_DATASOURCE_PASSWORD: rootpass
     depends_on:
       - emartdb
 
@@ -45,15 +50,19 @@ services:
     image: mongo:4
     container_name: emongo
     environment:
-      - MONGO_INITDB_DATABASE=epoc
+      MONGO_INITDB_DATABASE: emart    # FIXED
     ports:
       - "27017:27017"
 
   emartdb:
-    image: mysql:8.0.33
+    image: mysql:5.7             # FIXED: use compatible version
     container_name: emartdb
+    environment:
+      MYSQL_ROOT_PASSWORD: rootpass   # must match WebAPI
+      MYSQL_DATABASE: emart           # FIXED DB name
     ports:
       - "3306:3306"
-    environment:
-      - MYSQL_ROOT_PASSWORD=emartdbpass
-      - MYSQL_DATABASE=books
+
+volumes:
+  mongo_data:
+  mysql_data:
