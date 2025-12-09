@@ -25,10 +25,10 @@ This repository contains the complete microservices ecosystem for the eMart Appl
 ```
 .
 ├── architecture-diagram/      # Architecture diagrams (PNG/SVG)
-├── books-api-java/            # Java Books API (Microservice)
-├── emart-api-node/            # Node.js eMart API (Microservice)
-├── emart-client-angular/      # Angular frontend application
-├── gateway-nginx/             # API Gateway (reverse proxy)
+├── javaapi/                   # Java Books API (Microservice)
+├── nodeapi/                   # Node.js eMart API (Microservice)
+├── client/                    # Angular frontend application
+├── nginx/                     # API Gateway (reverse proxy)
 ├── kkartchart/                # Chart analytics service
 │
 ├── Dockerfile                 # Optional global Dockerfile
