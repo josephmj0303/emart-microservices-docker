@@ -1,4 +1,14 @@
 # 🚀 E-MART Microservices DevOps Platform
+![Docker](https://img.shields.io/badge/Docker-Containerized-blue?logo=docker)
+![Docker Compose](https://img.shields.io/badge/Docker--Compose-Orchestration-blue?logo=docker)
+![Nginx](https://img.shields.io/badge/Nginx-Reverse%20Proxy-green?logo=nginx)
+![Angular](https://img.shields.io/badge/Frontend-Angular-red?logo=angular)
+![Node.js](https://img.shields.io/badge/Backend-Node.js-green?logo=node.js)
+![Spring Boot](https://img.shields.io/badge/Backend-Spring%20Boot-brightgreen?logo=springboot)
+![MongoDB](https://img.shields.io/badge/Database-MongoDB-green?logo=mongodb)
+![MySQL](https://img.shields.io/badge/Database-MySQL-blue?logo=mysql)
+![AWS](https://img.shields.io/badge/Deployed%20on-AWS-orange?logo=amazonaws)
+
 
 A production-style microservices application deployed using Docker Compose with Nginx as a reverse proxy, integrating multiple backend services and databases.
 
