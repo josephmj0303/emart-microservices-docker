@@ -1,150 +1,234 @@
-# eMart Microservices Application
+# 🚀 E-MART Microservices DevOps Platform
 
-A production-grade, containerized microservices application built using **Angular**, **Node.js**, **Java**, **MongoDB**, **MySQL**, and **Nginx**.  
-The system is deployed using **Docker Compose** and optionally integrates CI/CD using **Jenkins**.
-
----
-
-## 1. Overview
-
-This repository contains the complete microservices ecosystem for the eMart Application, including:
-
-- Angular Client Application  
-- Node.js eMart API (MongoDB)  
-- Java Books API (MySQL)  
-- Nginx API Gateway  
-- kkartchart analytics module  
-- Docker Compose deployment  
-- Jenkins pipeline configuration  
+A production-style microservices application deployed using Docker Compose with Nginx as a reverse proxy, integrating multiple backend services and databases.
 
 ---
 
-## 2. Repository Structure
+## 📌 Project Overview
+
+This project demonstrates a **real-world DevOps architecture**:
+
+* Angular frontend (client)
+* Node.js API (MongoDB)
+* Spring Boot API (MySQL)
+* Nginx reverse proxy (API Gateway)
+* Docker Compose orchestration
+
+It simulates how modern e-commerce platforms are deployed in containerized environments.
 
 ---
+
+## 🧠 Architecture
+
+![Architecture](architecture-diagram/emartapp_architecture.png)
+
+### 🔹 Flow
+
+```
+User (Browser)
+      ↓
+Nginx (Reverse Proxy)
+   ├── /        → Angular Client
+   ├── /api     → Node.js API (MongoDB)
+   └── /webapi  → Spring Boot API (MySQL)
+```
+
+---
+
+## 📦 Repository Structure
+
 ```
 .
-├── architecture-diagram/      # Architecture diagrams (PNG/SVG)
-├── javaapi/                   # Java Books API (Microservice)
-├── nodeapi/                   # Node.js eMart API (Microservice)
-├── client/                    # Angular frontend application
-├── nginx/                     # API Gateway (reverse proxy)
-├── kkartchart/                # Chart analytics service
-│
-├── Dockerfile                 # Optional global Dockerfile
-├── Jenkinsfile                # CI/CD pipeline definition
-├── docker-compose.yaml        # Multi-service orchestration
-├── package-lock.json          # Node dependency lockfile
-└── README.md                  # Main documentation
-```
----
-
-## 3. Architecture
-
-The system follows a microservices architecture with an Nginx API Gateway that routes traffic to all backend services.
-
-### Routing Table
-
-| Route Prefix | Service | Technology |
-|--------------|----------|-------------|
-| `/` | Angular Client | Angular |
-| `/api/*` | eMart API | Node.js + MongoDB |
-| `/webapi/*` | Books API | Java + MySQL |
-| `/charts/*` | kkartchart | Node.js |
-
-Architecture diagrams are stored in:
-
-```
-architecture-diagram/
+├── client/                # Angular frontend
+├── nodeapi/               # Node.js backend (MongoDB)
+├── javaapi/               # Spring Boot backend (MySQL)
+├── nginx/                 # Reverse proxy configuration
+├── docker-compose.yaml    # Multi-container orchestration
+├── docs/screenshots       # Screenshots & documentation
+├── architecture-diagram/  # System design diagrams
+├── kkartchart-sample/     # Helm chart (Kubernetes - future use)
+├── Jenkinsfile.sample     # CI/CD pipeline (future use)
+└── README.md
 ```
 
 ---
 
-## 4. Technology Stack
+## ⚙️ Technologies Used
 
-### Frontend
-- Angular
-
-### Backend APIs
-- Node.js + Express + Mongoose  
-- Java (Spring Boot / JAX-RS)
-
-### Databases
-- MongoDB (for eMart API)  
-- MySQL (for Books API)
-
-### Infrastructure
-- Nginx API Gateway  
-- Docker  
-- Docker Compose  
-- Jenkins CI/CD
+* Docker & Docker Compose
+* Nginx (Reverse Proxy)
+* Angular (Frontend)
+* Node.js + Express (API)
+* Spring Boot (Java API)
+* MongoDB
+* MySQL
+* AWS EC2 (Deployment)
 
 ---
 
-## 5. Running the Application
+## 🚀 Deployment (Docker Compose)
 
-### Prerequisites
-- Docker   
-- Docker Compose
-- NodeJS (optional for local dev)
-- Java 8+ (optional for local dev)
+### 1️⃣ Clone Repository
 
-
-### Start all services
-
-```
-docker compose up -d --build
-```
-
-### Stop all services
-
-```
-docker compose down
+```bash
+git clone <your-repo-url>
+cd emart-microservices-docker
 ```
 
 ---
 
-## 6. Access URLs
+### 2️⃣ Start Services
 
-| Service | URL |
-|---------|------|
-| Angular Client | http://localhost/ |
-| eMart API | http://localhost/api |
-| Books API | http://localhost/webapi |
-| Charts Service | http://localhost/charts |
-| Nginx Gateway | http://localhost/ |
+```bash
+docker compose up --build -d
+```
 
 ---
 
-## 7. CI/CD Pipeline (Jenkins)
+### 3️⃣ Access Application
 
-The included `Jenkinsfile` automates:
-
-- Building Angular, Node.js, and Java applications  
-- Creating Docker images  
-- Deploying using Docker Compose  
-
-To use:
-
-1. Create a Jenkins Pipeline job  
-2. Link this Git repository  
-3. Ensure the Jenkins agent has Docker installed  
+```
+http://<EC2-PUBLIC-IP>
+```
 
 ---
 
-## 8. Future Enhancements
+## 📸 Screenshots
 
-- Kubernetes deployment  
-- Centralized logging (ELK / Loki)  
-- Monitoring with Prometheus + Grafana  
-- JWT authentication  
-- API rate limiting  
+### 🐳 Containers Running
+
+![Docker](docs/screenshots/docker-ps.png)
 
 ---
 
-## 9. License
+### 🌐 Application UI
 
-This project is intended for demonstration purposes.
+![Frontend](docs/screenshots/frontend.png)
 
+---
 
+### 🔐 API Validation (Node API via Nginx)
 
+![API](docs/screenshots/api-success.png)
+
+---
+
+### 🔁 Frontend ↔ Backend Integration
+
+![Network](docs/screenshots/network-tab.png)
+
+---
+
+### 🗄️ Database Connectivity
+
+![Database](docs/screenshots/db.png)
+
+---
+
+## 🔍 API Endpoints
+
+### Node API
+
+```
+POST /api/user/login
+POST /api/user/register
+```
+
+---
+
+### Java API
+
+```
+GET /webapi/books
+GET /webapi/published
+```
+
+---
+
+## 🔧 Reverse Proxy (Nginx)
+
+Handles routing between services:
+
+```nginx
+location / {
+    proxy_pass http://client/;
+}
+
+location /api/ {
+    proxy_pass http://api:5000;
+}
+
+location /webapi/ {
+    proxy_pass http://webapi:9000;
+}
+```
+
+---
+
+## 🧪 Validation Commands
+
+```bash
+# Node API
+curl -X POST http://<IP>/api/user/login \
+-H "Content-Type: application/json" \
+-d '{"email":"devops@abc.com","password":"devops"}'
+
+# Java API
+curl http://<IP>/webapi/books
+```
+
+---
+
+## 🚀 Future Enhancements
+
+### 🔹 CI/CD Pipeline
+
+* Jenkins pipeline included (`Jenkinsfile.sample`)
+* Can be extended to automate build & deployment
+
+---
+
+### 🔹 Kubernetes Deployment
+
+* Helm chart available (`kkartchart-sample/`)
+* Enables migration to Kubernetes clusters
+
+---
+
+### 🔹 Improvements
+
+* Add HTTPS (SSL with Nginx)
+* Add monitoring (Prometheus + Grafana)
+* Add centralized logging (ELK stack)
+
+---
+
+## 🧠 Key Learnings
+
+* Microservices architecture deployment
+* Reverse proxy design (Nginx)
+* Container networking in Docker
+* Debugging 502 / routing issues
+* Multi-database integration
+* Production-style service separation
+
+---
+
+## 📌 Author
+
+**DevOps Portfolio Project**
+
+---
+
+## ⭐ Conclusion
+
+This project demonstrates the ability to:
+
+* Design scalable microservices architecture
+* Deploy multi-container applications
+* Implement reverse proxy routing
+* Debug real-world deployment issues
+
+---
+
+💡 *This is a production-style DevOps implementation showcasing real-world deployment practices.*
