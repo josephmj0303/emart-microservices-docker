@@ -1,11 +1,10 @@
-version: "3.8"
-
 services:
   client:
     build:
       context: ./client
     ports:
       - "4200:4200"
+    restart: always
     container_name: client
     depends_on:
       - api
@@ -45,23 +44,33 @@ services:
       - "./nginx/default.conf:/etc/nginx/conf.d/default.conf"
     ports:
       - "80:80"
+    depends_on:
+      - client
+      - api
+      - webapi
 
   emongo:
     image: mongo:4
+    restart: always
     container_name: emongo
     environment:
       MONGO_INITDB_DATABASE: emart    # FIXED
     ports:
       - "27017:27017"
+    volumes:
+    - mongo_data:/data/db
 
   emartdb:
     image: mysql:5.7             # FIXED: use compatible version
+    restart: always
     container_name: emartdb
     environment:
       MYSQL_ROOT_PASSWORD: rootpass   # must match WebAPI
       MYSQL_DATABASE: emart           # FIXED DB name
     ports:
       - "3306:3306"
+    volumes:
+    - mysql_data:/var/lib/mysql
 
 volumes:
   mongo_data:
