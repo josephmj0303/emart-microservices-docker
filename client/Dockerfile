@@ -1,7 +1,7 @@
 FROM node:14 AS web-build
 WORKDIR /usr/src/app
 COPY ./ ./client
-RUN cd client && npm install && npm run build --prod
+RUN cd client && npm install && npm run build 
 
 # Use official nginx image as the base image
 FROM nginx:latest
@@ -12,3 +12,5 @@ COPY nginx.conf /etc/nginx/conf.d/default.conf
 
 # Expose port 4200
 EXPOSE 4200
+
+# Refactor Angular Dockerfile
