@@ -41,3 +41,5 @@ mongoose
     console.log("\nConnected to".magenta, "E-MART".cyan, "database".magenta);
   })
   .catch(err => console.log("Error connecting to database".cyan, err));
+
+// Decouple Frontend Serving from Node API
