@@ -224,7 +224,7 @@ curl http://<IP>/webapi/books
 
 ---
  
-# 🔒 Source Code Notice
+## 🔒 Source Code Notice
 This repository intentionally excludes application source code:
 
 - To simulate real-world enterprise practices
